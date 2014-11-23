@@ -1,12 +1,12 @@
 (ns gin.site
   (:require [hiccup.def :refer [defelem]]
-  	        [hiccup.element :refer [javascript-tag]]))
+            [hiccup.element :refer [javascript-tag]]))
 
-(defelem sentinel [control-id]
+(defelem sentinel [control-id & [user-id]]
   (javascript-tag
-  	(str
-  	  "(function(i,s,o,g,r,a,m){"
-  	    "i['GoogleAnalyticsObject']=r;"
+    (str
+      "(function(i,s,o,g,r,a,m){"
+        "i['GoogleAnalyticsObject']=r;"
         "i[r]=i[r]||"
         "function(){(i[r].q=i[r].q||[]).push(arguments)},"
         "i[r].l=1*new Date();"
@@ -14,5 +14,7 @@
         "a.src=g;"
         "m.parentNode.insertBefore(a,m)})"
         "(window,document,'script','//www.google-analytics.com/analytics.js','ga');"
-        "ga('create', " control-id ", 'auto');"
+        "ga('create', '" control-id "', 'auto');"
+        (if user-id ; Set the user ID using signed-in user_id.
+          (str "ga('set', '&uid', {{" user-id "}})"))
         "ga('send', 'pageview');")))

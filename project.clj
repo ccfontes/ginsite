@@ -1,4 +1,4 @@
-(defproject ginsite "0.1.0"
+(defproject ginsite "0.1.1"
 
   :description "Google Analytics Insights for your Site in Clojure Hiccup."
 
